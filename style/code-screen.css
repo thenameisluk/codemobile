@@ -164,6 +164,9 @@ coption:hover{
 
 
 lslider{
+    border-top-right-radius: 2vh;
+    border-bottom-right-radius: 2vh;
+
     position: absolute;
     width: 40vh;
     height: 100vh;
@@ -186,6 +189,9 @@ lslider{
 }
 
 rslider{
+    border-top-left-radius: 2vh;
+    border-bottom-left-radius: 2vh;
+
     position: absolute;
     width: 35vh;
     height: 100vh;
