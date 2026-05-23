@@ -21,6 +21,7 @@ diffile{
     display: flex;
     flex-direction: column;
 
+    min-height: 3vh;
     margin: 2vh;
     background-color: black;
     display: block;

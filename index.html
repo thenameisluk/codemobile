@@ -108,6 +108,18 @@
 
     //zaawansowane funkcje
 
+    function validateText(/**@type {Element}**/inp,fn=()=>{}){
+        /**@type {string}**/
+        let txt = inp.value
+        
+        if(txt==""){
+            addTag(inp,"inp_wrong");
+        }else{
+            rmTag(inp,"inp_wrong");
+            fn();
+        }
+    }
+
     function attachHoldHandler(el=document.getElementById(""),fn,wait=500){
         var clicked = false;
         var id = 0;
@@ -201,8 +213,8 @@
                 <safezone>
                     <lflex>
                         <info>Nazwa projektu</info>
-                        <input class="textinput" type="text">
-                        <confbutton onclick='fromto(main_screen,code_screen)'>Utwórz</confbutton>
+                        <input class="textinput" type="text" id="nprj">
+                        <confbutton onclick='validateText(nprj,()=>{fromto(main_screen,code_screen)})'>Utwórz</confbutton>
                     </lflex>
                 </safezone>
             </jumper>
@@ -212,13 +224,13 @@
                     
                     <lflex>
                         <info>Adres projektu</info>
-                        <input class="textinput" type="text">
+                        <input class="textinput" type="text" id="addr">
                         <info>Konto</info>
                         <select class="textinput" id="cars">
                             <option value="none">Brak</option>
                             <option value="github"><img class="inlineicon" src="./asety/github-svgrepo-com.svg">Nazwa użytkownika</option>
                         </select>
-                        <confbutton onclick='fromto(main_screen,code_screen)'>Importuj</confbutton>
+                        <confbutton onclick='validateText(addr,()=>{fromto(main_screen,code_screen)})'>Importuj</confbutton>
                     </lflex>
                 </safezone>
             </jumper>
@@ -571,7 +583,7 @@
                     </it>
                 </diffile>
                 
-                <confbutton>commit</confbutton>
+                <confbutton onclick='document.querySelectorAll(".ceck").forEach((el)=>{el.remove()})'>commit</confbutton>
             </main>
         </safezone>
         <safezone id="doc_screen" class="hide">

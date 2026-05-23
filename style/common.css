@@ -102,17 +102,27 @@ jumperbeen{
 
     height: 4vh;
 
-    border-radius: 1vh;
     color: white;
 
-    width: 100%;
+    /* justify-self: center; */
+    width: 98%;
 
 
     font-size: 3vh;
     
     background-color: var(--backgroud-3);
-    border: none;
+    border-radius: 1vh;
+    border-style: solid;
+    border: white;
+    /* border-width: 0; */
+
+    
 }
+
+.inp_wrong{
+    border: 3px solid red !important;
+}
+
 confbutton{
     text-align: center;
 
