@@ -1,0 +1,251 @@
+twoflex{
+    justify-content: center;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bigbutton{
+    cursor: grab;
+
+    padding: 3dvh;
+    aspect-ratio: 1;
+    height: 14vh;
+    background-color: var(--backgroud-3);
+    border-radius: 2vh;
+    transition-property: backgroud-color;
+    transition-duration: 0.4s;
+}
+.bigbutton:hover{
+    background-color: var(--backgroud-2-5);
+}
+
+info{
+    display: block;
+    font-size: 3vh;
+    font-weight: 500;
+}
+
+midcenter{
+    font-size: 3vh;
+    margin: 2.4vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+desc{
+    font-size: 3.5vh;
+    color: var(--text-blue);
+    font-weight: bold;
+}
+jumper{
+    left: 0;
+    top: 100%;
+
+    border-top-left-radius: 3vh;
+    border-top-right-radius: 3vh;
+
+    transition-timing-function: ease-in;
+    transition-duration: 300ms;
+    transition-property: transform;
+
+    width: 100%;
+    padding-bottom: 30vh;
+
+    position: absolute;
+    display: block;
+    background-color: var(--backgroud-1-5);
+}
+
+popup{
+    scale: 0;
+    height: 0;
+    position: absolute;
+
+    transition-timing-function: ease-in;
+    transition-duration: 300ms;
+    transition-property: scale;
+}
+.spopup{
+    scale: 100%;
+}
+
+.junfold{
+    transform: translate(0,-100%);
+}
+
+jumperbeen{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vh;
+
+    width: 15%;
+    height: 2vh;
+
+    margin-bottom: 3vh;
+
+    border-radius: 1vh;
+    background-color: var(--been);
+
+    cursor: grab;
+    
+}
+
+
+.textinput{
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+
+    display: block;
+
+    height: 4vh;
+
+    border-radius: 1vh;
+    color: white;
+
+    width: 100%;
+
+
+    font-size: 3vh;
+    
+    background-color: var(--backgroud-3);
+    border: none;
+}
+confbutton{
+    text-align: center;
+
+    margin-top: 3vh;
+    margin-bottom: 1vh;
+
+    font-size: 4vh;
+    font-weight: 600;
+
+    border-radius: 2vh;
+
+    display: block;
+    padding: 1vh;
+
+    background-color: var(--forground-blue-2);
+    color: white;
+    border: none;
+
+    cursor: grab;
+}
+confbutton:hover{
+    background-color: var(--forground-blue-1-5);
+}
+
+reg{
+    font-weight: 300;
+}
+
+.right{
+    float: right;
+}
+
+topbar{
+    padding: 2vh;
+    width: 100%;
+    position: relative;
+    left: -2vh;
+    margin-top: 0;
+    display: block;
+    background-color: var(--backgroud-0-5);
+
+    font-size: 8vh;
+    font-weight: 500;
+    
+    margin-bottom: 2vh;
+}
+.backicon{
+    cursor: grab;
+
+    display: inline-block;
+    aspect-ratio: 1;
+    height: 6vh;
+    
+    padding-right: 2vh;
+}
+scroller{
+    display: block;
+    overflow-y: scroll;
+    height: 85vh;
+}
+
+
+.grab{
+    cursor: grab;
+}
+
+.inlineicon{
+    position: relative; top: 0.5vh;padding: 0;
+    display: inline-block;
+    aspect-ratio: 1;
+    height: 3vh;
+    padding-right: 0.6vh;
+    padding-left: 0.6vh;
+}
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+listbox{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    border-radius: 1.5vh;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    
+
+    /* height: 15vh; */
+    
+    overflow-y:scroll;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: var(--backgroud-1);
+}
+lbitem{
+    cursor: grab;
+
+    display: block;
+    background-color: var(--backgroud-2);
+    font-size: 2.5vh;
+    font-weight: 500;
+    padding: 1vh;
+}
+lbitem:hover{
+    
+    background-color: var(--backgroud-1-5);
+}
+lbitemnh{
+    display: block;
+    background-color: var(--backgroud-2);
+    font-size: 2.5vh;
+    font-weight: 500;
+    padding: 1vh;
+}
+lbseparator{
+    display: block;
+    background: var(--backgroud-1);
+    padding: 0.2vh;
+}
+
+curtain{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000060;
+
+    transition-property: background-color;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in;
+}

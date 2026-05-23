@@ -1,0 +1,54 @@
+themegrid{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.theme{
+    cursor: grab;
+
+    margin: 1vh;
+    aspect-ratio: 800/550;
+    border-radius: 2vh;
+    width: 20vh;
+    justify-self: center;
+}
+.theme:hover{
+    background-color: var(--forground-blue-1-5);
+}
+.themeS{
+    cursor: default;
+
+    background-color: var(--text-blue);
+}
+.themeS:hover{
+    background-color: var(--text-blue);
+}
+
+
+toggle{
+    display: inline-block;
+    height: 3vh;
+    width: 6vh;
+    background-color: red;
+
+    border-radius: 2vh;
+
+    transition-property: background-color;
+    transition-duration: 300ms;
+}
+tgdot{
+    display: block;
+    height: 3vh;
+    width: 3vh;
+    background-color: var(--backgroud-3);
+
+    border-radius: 2vh;
+
+    transition-property: margin-left;
+    transition-duration: 300ms;
+}
+.chked{
+    background-color: green;
+}
+.chked>tgdot{
+    margin-left: 3vh;
+}

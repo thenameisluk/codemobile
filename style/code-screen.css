@@ -1,0 +1,319 @@
+fn{/*function*/
+    color: #d8dd73;
+}
+op{
+    color: #bfbfaf;
+}
+kw{/*keyword*/
+    color: #e161d4;
+}
+vr{/*variable*/
+    color: #8fc9ea;
+}
+cs{/*class*/
+    color: #48b988;
+}
+tp{/*type*/
+    color: #4795d9;
+}
+st{/*string*/
+    color: #c88b72;
+}
+ct{/*const*/
+    color: #9cdbf0;
+}
+nm{/*number*/
+    color: #aac295;
+}
+ln{/*line number*/
+    color: #2383af;
+}
+
+
+ce{
+    text-decoration: underline wavy var(--error);
+}
+
+cw{
+    text-decoration: underline wavy var(--warning);
+}
+
+doc{
+    cursor: grab;
+}
+
+.kb{
+    display: block;
+    width: 108%;
+    position: relative;
+    left: -2vh;
+    
+}
+
+ico{
+    padding: 2vh;
+    font-size: 2.5vh;
+    left: -1vh;
+    top: 0;
+
+    width: 100%;
+    position:absolute;
+
+    display: block;
+
+    background-color: transparent;
+}
+
+topisland{
+    display: block;
+    height: 4vh;
+
+    width: 90%;
+
+    background-color: var(--backgroud-2);
+    padding: 1vh;
+    margin: 1vh;
+    
+    border-radius: 2vh;
+}
+
+digbuble{
+    font-size: 3vh;
+    border-radius: 1vh;
+    display: inline-block;
+    background-color: var(--backgroud-3);
+}
+digbuble:hover{
+    background-color: var(--backgroud-2-5);
+}
+
+warn{
+    padding: 1vh;
+    color: #f57800ff;
+}
+err{
+    padding: 1vh;
+    color: #db1a1aff;
+}
+
+
+.cc{
+    height: 100vh;
+
+    background-color: var(--backgroud-0-5);
+    display: flex;
+    flex-direction: column;
+
+    
+    
+    align-items:center;
+}
+codecontainer{
+    
+
+    display: block;
+    background-color: var(--bg-code);
+
+    width: 100%;
+    position: relative;
+    padding: 2vh;
+    padding-top: 0vh;
+}
+code{
+    font-weight: 600;
+
+    height:62vh;
+    display: block;
+    overflow: scroll;
+    white-space:pre;
+    font-family: codeFont;
+    background-color: var(--bg-code);
+
+    font-size: 2.5vh;
+}
+
+complete{
+    
+
+    display: flex;
+    background-color: var(--backgroud-1);
+    width: 108%;
+    padding: 0.5vh;
+    position: relative;
+    left: -2vh;
+
+    overflow-x: scroll;
+}
+coption{
+    display: inline-block;
+
+    border-radius: 1vh;
+    min-width: 20vh;
+    text-align: center;
+    background-color: var(--backgroud-2);
+    margin: 0.5vh;
+    padding: 0.5vh;
+
+    font-size: 3vh;
+
+    cursor: grab;
+}
+coption:hover{
+    background-color: var(--backgroud-1-5);
+}
+
+
+lslider{
+    position: absolute;
+    width: 40vh;
+    height: 100vh;
+
+    display: block;
+
+    background-color: var(--backgroud-1);
+
+    transition-property: transform;
+    transition-duration: 300ms;
+    transition-timing-function: ease-out;
+
+    transform: translate(-100%,0);
+
+    left: 0;
+    top: 0;
+}
+.sshow{
+    transform: translate(0,0);
+}
+
+rslider{
+    position: absolute;
+    width: 35vh;
+    height: 100vh;
+
+    display: block;
+
+    background-color: var(--backgroud-1);
+
+    transition-property: transform;
+    transition-duration: 300ms;
+    transition-timing-function: ease-out;
+
+    transform: translate(100%,0);
+
+    right: 0;
+    top: 0;
+}
+
+sfilar{
+    display: block;
+    width: 100%;
+    padding: 3vh;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 5vh;
+    background-color: var(--backgroud-1);
+    overflow: hidden;
+}
+
+docinfo{
+    display: block;
+    padding: 1vh;
+    font-weight: 500;
+    font-size: 3vh;
+}
+docdesc{
+    background-color: var(--backgroud-1);
+    display: block;
+    padding: 1vh;
+    font-size: 3vh;
+}
+errtag{
+    display: block;
+    padding: 1vh;
+    font-size: 3vh;
+}
+.erricon{
+    display: inline-block;
+    aspect-ratio: 1;
+    width: 4vh;
+}
+
+
+.ficon{
+    display: inline-block;
+    position: relative;
+    top: 0.5vh;
+    aspect-ratio: 1;
+    width: 3vh;
+    margin-right: 1vh;
+    
+}
+.fdir>div>fname>.ficon{
+    transform: rotate(90deg);
+    transition-property: transform;
+    transition-duration: 300ms;
+}
+.fclose>div>fname>.ficon{
+    transform: rotate(0);
+}
+
+
+file{
+
+    transition-property: height,margin,padding,display;
+    transition-duration: 300ms;
+
+    display: block;
+    
+    font-size: 3vh;
+    margin-left: 2vh;
+
+    padding: 1vh;
+}
+
+fname{
+    cursor: grab;
+}
+
+.fclose>file{
+    margin: 0;
+    padding: 0;
+    height: 0;
+
+    overflow: hidden;
+}
+
+fpopup{
+    top: 0;
+    left: 0;
+    position: absolute;
+    display: block;
+
+}
+
+bottomb{
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%,0);
+
+    display: flex;
+
+
+    width: 80%;
+
+
+    margin: auto;
+    margin-bottom: 0;
+
+    justify-content: space-between;
+}
+
+.tabicon{
+    padding: 1vh;
+    aspect-ratio: 1;
+    width: 8vh;
+
+    cursor: grab;
+}

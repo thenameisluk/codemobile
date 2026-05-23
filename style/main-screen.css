@@ -1,0 +1,37 @@
+.kofi{
+    position: absolute;
+    left: 100%;
+    top: 0;
+    aspect-ratio: 1;
+    width: 9vh;
+    transform:translate(-14vh,7vh);
+
+    cursor: grab;
+}
+.settings{
+    position: absolute;
+    display: block;
+    top: 100%;
+    left: 100%;
+    transform: translate(-12vh,-11vh);
+    aspect-ratio: 1;
+    width: 6vh;
+    border-radius: 2vh;
+    padding: 1vh;
+    background-color: var(--backgroud-2);
+
+    cursor: grab;
+}
+.settings:hover{
+    background-color: var(--backgroud-1-5);
+}
+
+maintitle{
+    display: block;
+    margin-top: 6vh;
+    font-weight: bold;
+    display: block;
+    color: var(--text-blue);
+    font-size: 8vh;
+    overflow-wrap: normal;
+}

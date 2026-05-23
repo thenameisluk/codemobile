@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeMobile</title>
+    <link rel="stylesheet" href="./style/main.css">
+    <link rel="stylesheet" href="./style/common.css">
+    <link rel="stylesheet" href="./style/main-screen.css">
+    <link rel="stylesheet" href="./style/settings-screen.css">
+    <link rel="stylesheet" href="./style/code-screen.css">
+    <link rel="stylesheet" href="./style/preview-screen.css">
+    <link rel="stylesheet" href="./style/git-screen.css">
+    <link rel="stylesheet" href="./style/priority.css">
+    <script>
+        if(!navigator.userAgent.toLowerCase().includes("firefox"))
+            alert("!!!UWAGA!!!\nPoprawne działania gwarantowane wyłącznie w przeglądarce Firefox!!!\nUrządzenie Mobile oraz google chrome nie wspierane!!!");
+        
+        function getE(a,fn){
+            if(a instanceof Array)
+                a.forEach(b=>fn(b))
+            else if(typeof a =="object")
+                fn(a)
+            else
+                fn(document.getElementById(a))
+        }
+        function addTag(a,tag){
+            getE(a,(e=>{
+                e.classList.add(tag);
+            }))
+        }
+        function rmTag(a,tag){
+            getE(a,(e=>{
+                e.classList.remove(tag);
+            }))
+        }
+        function fromto(a,b){
+            console.log("from "+a+" to "+b)
+            addTag(a,"hide")
+            rmTag(b,"hide")
+        }
+        function tglTag(a,tag){
+            getE(a,(e=>{
+                e.classList.toggle(tag);
+            }))
+            console.log("toggle")
+        }
+
+
+        var lock = false;
+
+
+
+    function attachSwipeHandler(el=document.getElementById(""),fn=()=>{},right=true,corner=5,sens=3,updown=false){
+        var lastP = 0;
+        var eligible = false;
+        el.addEventListener("mousedown" ,(/** @type {MouseEvent} **/ev)=>{
+            if(lock)
+                return;
+            
+            let p;
+            if(!updown)
+                p = ev.layerX*100/el.getBoundingClientRect().width;
+            else
+                p = ev.layerY*100/el.getBoundingClientRect().height;
+
+            if(!right) p = 100-p;
+
+            // console.log("md "+el.tagName+" "+Math.round(p));
+
+            if(p<corner){
+                // debugger
+                console.log("eligible "+p+" < "+corner)
+                eligible=true;
+                lastP = p;
+            }else eligible=false
+            
+        });
+        el.addEventListener("mousemove" ,(/** @type {MouseEvent} **/ev)=>{
+            if(lock)
+                return;
+            
+            if(!updown)
+                p = ev.layerX*100/el.getBoundingClientRect().width;
+            else
+                p = ev.layerY*100/el.getBoundingClientRect().height;
+
+            if(!right) p = 100-p;
+            
+            // console.log("mm "+el.tagName+" "+Math.round(p));
+
+            if(eligible){
+                if(lastP+sens<=p){
+                    fn();
+                    eligible = false;
+                    console.log("triggered");
+                }
+            }
+        });
+        el.addEventListener("mouseup" ,(/** @type {MouseEvent} **/ev)=>{
+            lock = false;
+            // console.log("mu "+el.tagName+" ");
+            eligible = false;
+        });
+    }
+
+    var lastP = {x:0,y:0}
+
+    //zaawansowane funkcje
+
+    function attachHoldHandler(el=document.getElementById(""),fn,wait=500){
+        var clicked = false;
+        var id = 0;
+        el.addEventListener("mousedown" ,(/** @type {MouseEvent} **/ev)=>{
+            let remid = id;
+            clicked = true;
+            setTimeout(()=>{
+                console.log(remid+" x "+id)
+                if(clicked&&id==remid){
+                    fn()
+                }
+            },wait)
+        })
+        el.addEventListener("mouseleave",()=>{
+            if(clicked){
+                id++;
+                clicked = false;
+            }
+        })
+        el.addEventListener("mouseup",()=>{
+            if(clicked){
+                id++;
+                clicked = false;
+            }
+        })
+    }
+        
+    </script>
+</head>
+<body>
+    <!-- space   -->
+    <screen id="app_screen">
+        <script>
+            app_screen.addEventListener("mousemove" ,(/** @type {MouseEvent} **/ev)=>{
+                lastP.x = ev.layerX*100/app_screen.getBoundingClientRect().width;
+                lastP.y = ev.layerY*100/app_screen.getBoundingClientRect().height;
+                // console.log(lastP)
+            })
+        </script>
+        <safezone id="main_screen" class="">
+            <main>
+                <maintitle>
+                    Witaj w CodeMobile
+                    <img class="kofi" src="./asety/kofi_symbol.svg">
+                </maintitle>
+                <info>Dodaj projekt</info>
+                <twoflex>
+                    <midcenter>
+                        <img id="nowy_btn" class="bigbutton" src="./asety/plus-large-svgrepo-com.svg">
+                        <desc>Nowy</desc>
+                    </midcenter>
+                    <midcenter>
+                        <popup id="importp" onmouseleave='rmTag(importp,"spopup")' style="transform: translate(-5vh,10vh);">
+                            <listbox>
+                                <lbitem onclick='fromto(main_screen,code_screen)'>
+                                    lokanych plików
+                                </lbitem>
+                                <lbseparator></lbseparator>
+                                <lbitem id="git_btn">
+                                    repozytorium git
+                                </lbitem>
+                            </listbox>
+                        </popup>
+                        <img class="bigbutton" src="./asety/download-svgrepo-com.svg" id="importp" onclick='addTag(importp,"spopup")'>
+                        <desc>Importuj z</desc>
+                    </midcenter>
+                </twoflex>
+                <info>Otwórz ostatni</info>
+                <img class="settings" src="./asety/settings-svgrepo-com.svg" onclick='fromto(main_screen,settings_screen)'>
+                <listbox onclick='fromto(main_screen,code_screen)'>
+                    <lbitem>
+                        moja strona za 1m
+                    </lbitem>
+                    <lbseparator></lbseparator>
+                    <lbitem>
+                        portfolio grafika
+                    </lbitem>
+                    <lbseparator></lbseparator>
+                    <lbitem>
+                        lista to-do
+                    </lbitem>
+                </listbox>
+            </main>
+            <curtain id="cur_main" class="hide" onmousedown='addTag(this,"hide");rmTag(mainlist,"junfold");lock=true'>
+
+            </curtain>
+            
+            
+            <jumper id="newproj">
+                <jumperbeen></jumperbeen>
+                <safezone>
+                    <lflex>
+                        <info>Nazwa projektu</info>
+                        <input class="textinput" type="text">
+                        <confbutton onclick='fromto(main_screen,code_screen)'>Utwórz</confbutton>
+                    </lflex>
+                </safezone>
+            </jumper>
+            <jumper id="gitimp">
+                <jumperbeen></jumperbeen>
+                <safezone>
+                    
+                    <lflex>
+                        <info>Adres projektu</info>
+                        <input class="textinput" type="text">
+                        <info>Konto</info>
+                        <select class="textinput" id="cars">
+                            <option value="none">Brak</option>
+                            <option value="github"><img class="inlineicon" src="./asety/github-svgrepo-com.svg">Nazwa użytkownika</option>
+                        </select>
+                        <confbutton onclick='fromto(main_screen,code_screen)'>Importuj</confbutton>
+                    </lflex>
+                </safezone>
+            </jumper>
+            <script>
+                var mainlist = [];
+
+                function bindMain(doc,hold=[],click=[]){
+                    mainlist.push(doc);
+
+                    attachSwipeHandler(doc,()=>{
+                        rmTag(doc,"junfold")
+                        addTag(cur_main,"hide")
+                    },true,70,2,true)
+
+                    hold.forEach(btn=>{
+                        attachHoldHandler(btn,()=>{
+                            rmTag(cur_main,"hide")
+                            addTag(doc,"junfold")
+                        })
+                    })
+                    click.forEach(btn=>{
+                        btn.addEventListener("click",()=>{
+                            rmTag(cur_main,"hide")
+                            addTag(doc,"junfold")
+                        })
+                    })
+                }
+                bindMain(newproj,[],[nowy_btn])
+                bindMain(gitimp,[],[git_btn])
+
+            </script>
+        </safezone>
+        <!-- ustawienia -->
+        <safezone id="settings_screen" class="hide">
+            <main>
+                <topbar>
+                    <img class="backicon" src="./asety/chevron-back-svgrepo-com.svg" onclick='fromto(settings_screen,main_screen)'>
+                    Ustawienia
+                </topbar>
+                <scroller>
+                    <info>Edytor</info>
+                <listbox>
+                    <lbitem>
+                        Czcionka<reg class="right">Jetbrains</reg>
+                    </lbitem>
+                    <lbseparator></lbseparator>
+                    <lbitemnh>
+                        Motyw
+                        <themegrid>
+                            <img id="ta" class="theme themeS" src="./asety/code/a.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(ta,"themeS")'>
+                            <img id="tb" class="theme" src="./asety/code/b.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(tb,"themeS")'>
+                            <img id="tc" class="theme" src="./asety/code/c.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(tc,"themeS")'>
+                            <img id="td" class="theme" src="./asety/code/d.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(td,"themeS")'>
+                        </themegrid>
+                    </lbitemnh>
+                </listbox>
+                <info>Konta</info>
+                <listbox>hide
+                    <lbitemnh>
+                        <img class="inlineicon" src="./asety/github-svgrepo-com.svg">Nazwa użytkownika
+                    </lbitemnh>
+                    <lbseparator></lbseparator>
+                    <lbitem onclick='addTag(accpopup,"spopup")'>
+                        <popup id="accpopup" onmouseleave='rmTag(accpopup,"spopup")''>
+                            <listbox>
+                                <lbitem>
+                                    <img class="inlineicon" src="./asety/github-svgrepo-com.svg">Github
+                                </lbitem>
+                                <lbseparator></lbseparator>
+                                <lbitem>
+                                    <img class="inlineicon" src="./asety/gitlab-svgrepo-com.svg">Gitlab
+                                </lbitem>
+                                <lbseparator></lbseparator>
+                                <lbitem>
+                                    <img class="inlineicon" src="./asety/gitea-svgrepo-com.svg">Gittea
+                                </lbitem>
+                            </listbox>
+                        </popup>
+                        <img class="inlineicon center" src="./asety/plus-large-svgrepo-com.svg">
+                    </lbitem>
+                </listbox>
+                <info>Dostępność</info>
+                <listbox>
+                    <lbitem onclick='tglTag(jbt,"chked")'>
+                        Tryb jednorękiego bandyty<toggle id="jbt" class="right"><tgdot></tgdot></toggle>
+                    </lbitem>
+                </listbox>
+                </scroller>
+                
+
+            </main>
+        </safezone>
+        <!-- code -->
+        <safezone id="code_screen" class="cc hide">
+            
+            
+            <codecontainer>
+                <code id="code">
+                    
+
+<ln> 1</ln> <tp>function</tp> <fn>reload</fn><op>(){</op>
+<ln> 2</ln>   <tp><cw>var</cw></tp> <vr>zw</vr> <op>=</op> <fn>wczytajZlecenia</fn><op>()</op>
+<ln> 3</ln>   <vr>console</vr>.<fn><doc id="doclog_txt">log</doc></fn><op>(</op><vr>zw</vr><op>)</op>
+<ln> 4</ln>   <vr>iteml</vr>.<doc id="docinnerhtml_txt1">innerHTML</doc> <op>=</op> <st>""</st>
+<ln> 5</ln>   <tp>let</tp> <vr>num</vr> <op>=</op> <nm>0</nm>
+<ln> 6</ln>   <kw>for</kw><op>(</op><tp>let</tp> <vr>i</vr> <op>=</op> <nm>0</nm><op>;</op><vr>i</vr><op>&lt;</op><vr>zw</vr>.<doc>length</doc><op>;</op><vr>i</vr><op>++){</op>
+<ln> 7</ln>     <tp>let</tp> <vr>zam</vr> <op>=</op> <vr>zw</vr><op>[</op><vr>i</vr><op>]</op>
+<ln> 8</ln>     
+<ln> 9</ln>     <kw>if</kw><op>(</op><vr>zam</vr>.<vr>status</vr><op>==</op><nm>3</nm><op>||</op><vr>zam</vr>.<vr>status</vr><op>==</op><nm>-1</nm><op>)</op>
+<ln>10</ln>       <kw>continue</kw>
+<ln>11</ln>
+<ln>12</ln>       <vr><ce>nun</ce></vr><op>++;</op>
+<ln>13</ln>        
+<ln>14</ln>       <vr>iteml</vr>.<fn><doc id="docappend_txt">append</doc></fn><op>(</op><fn>orderBlock</fn><op>(</op><vr>i</vr><op>,</op><vr>zam</vr>.id<op>,</op><vr>zam</vr>.status<op>,</op><vr>zam</vr>.imie<op>,</op><vr>zam</vr>.adres<op>))</op>
+<ln>15</ln>     <op>}</op>
+<ln>16</ln>     <kw>if</kw><op>(</op><vr>num</vr><op>==</op><nm>0</nm><op>)</op>
+<ln>17</ln>       <vr>iteml</vr>.<doc id="docinnerhtml_txt2">innerHTML</doc> = <st>"brak zleceń"</st>
+<ln>18</ln>  <op>}</op></code>
+<complete><coption id="doclog_btn">log</coption><coption id="docappend_btn">append</coption><coption id="docinnerhtml_btn">innerHTML</coption></complete>
+<img class="kb" src="./asety/keyboard.jpg">
+            </codecontainer >
+            <ico>
+                <topisland>
+                    <img class="inlineicon grab" src="./asety/menu-svgrepo-com.svg" onclick='addTag(lslider,"sshow");rmTag(cur_code,"hide")'>
+                    <reg>main.js<img class="inlineicon" src="./asety/langs/javascript-svgrepo-com.svg"></reg>
+                    <digbuble class="right grab" onclick='addTag(rslider,"sshow");rmTag(cur_code,"hide")'>
+                        <warn>
+                            <img src="./asety/sym/warning-1-svgrepo-com.svg" class="inlineicon">
+                            1
+                        </warn>
+                        <err>
+                            <img src="./asety/sym/error-warning-danger-problem-attention-svgrepo-com.svg" class="inlineicon">
+                            1
+                        </err>
+                    </digbuble>
+                </topisland>
+            </ico>
+            <script>
+                let doclist = []
+            </script>
+            <curtain id="cur_code" class="hide" onmousedown='addTag(this,"hide");rmTag([lslider,rslider],"sshow");rmTag(doclist,"junfold");lock=true'>
+
+            </curtain>
+            <lslider id="lslider" class="" >
+                <safezone>
+                    <sfilar>
+                        <img class="backicon" src="./asety/chevron-back-svgrepo-com.svg" style="float: left;" onclick="fromto(code_screen,main_screen)">
+                        Nazwa
+                    </sfilar>
+                    <file>
+                        <fname>Nazwa</fname>
+                        <file id="f_src" class="fdir">
+                            <div onclick="tglTag(f_src,'fclose')"><fname><img class="ficon" src="./asety/next-svgrepo-com.svg">src</fname></div>
+                            <file><fname><img class="ficon" src="./asety/langs/javascript-svgrepo-com.svg">main.js</fname></file>
+                        </file>
+                        <file><fname><img class="ficon" src="./asety/langs/html-5-svgrepo-com.svg">index.html</fname></file>
+                        <file><fname><img class="ficon" src="./asety/langs/css-3-svgrepo-com.svg">style.css</fname></file>
+                    </file>
+                    
+                    <bottomb>
+                        <img src="./asety/tab/git-svgrepo-com.svg" class="tabicon" onclick='fromto(code_screen,git_screen)'>
+                        <img src="./asety/tab/play-svgrepo-com.svg" class="tabicon" onclick='fromto(code_screen,preview_screen)'>
+                        <img src="./asety/tab/docs-svgrepo-com.svg" class="tabicon" onclick='fromto(code_screen,doc_screen)'>
+                    </bottomb>
+                </safezone>
+            </lslider>
+            <rslider id="rslider" class="">
+                <safezone>
+                <errtag>
+                    <img class="erricon" src="./asety/sym/error-warning-danger-problem-attention-svgrepo-com.svg" style="float: left;" onclick="fromto(code_screen,main_screen)">
+                    <ce>Błędy</ce>
+                </errtag>
+                    <listbox>
+                        <lbitemnh>
+                            L12: nun nie został zateklarowany
+                        </lbitemnh>
+                    </listbox>
+                    <errtag>
+                        <img class="erricon" src="./asety/sym/warning-1-svgrepo-com.svg" style="float: left;" onclick="fromto(code_screen,main_screen)">
+                        <cw>Ostrzeżenia</cw>
+                    </errtag>
+                    <listbox>
+                        <lbitemnh>
+                            L2: var jest przestażały, spróbuj użyć let
+                        </lbitemnh>
+                    </listbox>
+                </safezone>
+            </rslider>
+            <jumper id="doclog" class="">
+                <jumperbeen></jumperbeen>
+                <safezone>
+                    
+                    <lflex>
+                        <docinfo>console: log() metoda statyczna</docinfo>
+                        <docdesc>
+                            Ta metoda wyrzuca wiadomość na konsole;
+                        </docdesc>
+                        
+                    </lflex>
+                </safezone>
+            </jumper>
+            <jumper id="docappend" class="">
+                <jumperbeen></jumperbeen>
+                <safezone>
+                    
+                    <lflex>
+                        <docinfo>Element: append() metoda</docinfo>
+                        <docdesc>
+                            Metoda dołącza węzeł obiektu docinnerhtmllub ciąg znaków po ostatnim dziecku elementu.
+                        </docdesc>
+                        
+                    </lflex>
+                </safezone>
+            </jumper>
+            <jumper id="docinnerhtml" class="">
+                <jumperbeen></jumperbeen>
+                <safezone>
+                    
+                    <lflex>
+                        <docinfo>Element: innerHTML właściwość</docinfo>
+                        <docdesc>
+                            pobiera lub ustawia zbór tagów html lub xml zawartych w elemencie.
+                        </docdesc>
+                        
+                    </lflex>
+                </safezone>
+            </jumper>
+            <jumper id="newfile">
+                <jumperbeen></jumperbeen>
+                <safezone>
+                    <lflex>
+                        <info>Nowy plik</info>
+                        <input class="textinput" type="text">
+                        <confbutton onclick='rmTag(newfile,"junfold");addTag(cur_code,"hide")'>Dodaj</confbutton>
+                    </lflex>
+                </safezone>
+            </jumper>
+            <jumper id="newdir">
+                <jumperbeen></jumperbeen>
+                <safezone>
+                    <lflex>
+                        <info>Nowyfolder</info>
+                        <input class="textinput" type="text">
+                        <confbutton onclick='rmTag(newdir,"junfold");addTag(cur_code,"hide")'>Dodaj</confbutton>
+                    </lflex>
+                </safezone>
+            </jumper>
+            <script>
+                attachSwipeHandler(code_screen,()=>{if(!cur_code.classList.contains("hide"))return;addTag(lslider,"sshow");rmTag(cur_code,"hide")})
+                attachSwipeHandler(lslider,()=>{rmTag(lslider,"sshow");addTag(cur_code,"hide")},false,60)
+                attachSwipeHandler(rslider,()=>{rmTag(rslider,"sshow");addTag(cur_code,"hide")},true,60)
+
+                function bindDoc(doc,hold=[],click=[]){
+                    doclist.push(doc);
+
+                    attachSwipeHandler(doc,()=>{
+                        rmTag(doc,"junfold")
+                        addTag(cur_code,"hide")
+                    },true,70,2,true)
+
+                    hold.forEach(btn=>{
+                        attachHoldHandler(btn,()=>{
+                            rmTag(cur_code,"hide")
+                            addTag(doc,"junfold")
+                        })
+                    })
+                    click.forEach(btn=>{
+                        btn.addEventListener("click",()=>{//tylko dodaj plik/folder
+                            rmTag(lslider,"sshow")
+                            rmTag(cur_code,"hide")
+                            addTag(doc,"junfold")
+                        })
+                    })
+                }
+                bindDoc(doclog,[doclog_btn,doclog_txt])
+                bindDoc(docappend,[docappend_btn,docappend_txt])
+                bindDoc(docinnerhtml,[docinnerhtml_txt1,docinnerhtml_txt2,docinnerhtml_btn])
+
+            </script>
+
+        </safezone>
+        <fpopup onmouseleave='addTag(this,"hide")' onclick='addTag(this,"hide")' id="fpopup" class="hide">
+            <listbox>
+                <lbitem id="newfile_btn">
+                    Dodaj plik
+                </lbitem>
+                <lbseparator></lbseparator>
+                <lbitem id="newdir_btn">
+                    Dodaj folder
+                </lbitem>
+            </listbox>
+            <script>
+                bindDoc
+            </script>
+        </fpopup>
+        <script>
+            function sfpopup(){
+
+                rmTag(fpopup,"hide")
+
+                fpopup.setAttribute("style","top: "+(lastP.y-4)+"%;left: "+(lastP.x-2)+"%;")
+                console.log(lastP)
+                
+            }
+            document.querySelectorAll("fname").forEach(fname=>{
+                attachHoldHandler(fname,sfpopup);
+            })
+
+            bindDoc(newfile,[],[newfile_btn])
+            bindDoc(newdir,[],[newdir_btn])
+        </script>
+        <!-- preview -->
+        <full id="preview_screen" class="hide">
+            <iframe src="https://thenameisluk.github.io/codePlayer/"></iframe>
+            <bottombar>
+                    <img class="backicon" src="./asety/chevron-back-svgrepo-com.svg" onclick='fromto(preview_screen,code_screen)'>
+                    <input class="textinput" type="text" value="172.0.0.1" disabled>
+            </bottombar>
+        </full>
+        <!-- git -->
+        <safezone id="git_screen" class="hide">
+            <main>
+                <topbar>
+                    <img class="backicon" src="./asety/chevron-back-svgrepo-com.svg" onclick='fromto(git_screen,code_screen)'>
+                    Git
+                </topbar>
+                <midgit>
+                    <midcenter>
+                        <img class="giticon grab" src="./asety/git/push-up-svgrepo-com.svg">
+                        Wypchnij
+                    </midcenter>
+                    <midcenter>
+                        <img class="giticon grab" src="./asety/git/push-down-svgrepo-com.svg">
+                        Ściągnij
+                    </midcenter>
+                </midgit>
+                <input class="textinput" type="text" value="nazwa">
+                <diffile>
+                    <it onclick='tglTag(this,"ceck")'>
+                        <img class="cbox" src="./asety/check-svgrepo-com.svg">
+                        index.html<img class="inlineicon" src="./asety/langs/html-5-svgrepo-com.svg">
+                    </it>
+                    <it onclick='tglTag(this,"ceck")'>
+                        <img class="cbox" src="./asety/check-svgrepo-com.svg">
+                        style.css<img class="inlineicon" src="./asety/langs/css-3-svgrepo-com.svg">
+                    </it>
+                    <it onclick='tglTag(this,"ceck")'>
+                        <img class="cbox" src="./asety/check-svgrepo-com.svg">
+                        main.js<img class="inlineicon" src="./asety/langs/javascript-svgrepo-com.svg">
+                    </it>
+                </diffile>
+                
+                <confbutton>commit</confbutton>
+            </main>
+        </safezone>
+        <safezone id="doc_screen" class="hide">
+            <main>
+                <topbar>
+                    <img class="backicon" src="./asety/chevron-back-svgrepo-com.svg" onclick='fromto(doc_screen,code_screen)'>
+                    Pomoc
+                </topbar>
+                <info>Element</info>
+                <listbox>
+                    <lbitem id="ddocinnerhtml_btn">
+                        innerHTML
+                    </lbitem>
+                    <lbseparator></lbseparator>
+                    <lbitem id="ddocappend_btn">
+                        append
+                    </lbitem>
+                </listbox>
+                <info>Console</info>
+                <listbox>
+                    <lbitem id="ddoclog_btn">
+                        log
+                    </lbitem>
+                </listbox>
+                <info>...</info>
+            </main>
+            <curtain id="cur_doc" class="hide" onmousedown='addTag(this,"hide");rmTag(ddoclist,"junfold");lock=true'>
+
+            </curtain>
+            
+            <jumper id="ddoclog" class="">
+                <jumperbeen></jumperbeen>
+                <safezone>
+                    
+                    <lflex>
+                        <docinfo>console: log() metoda statyczna</docinfo>
+                        <docdesc>
+                            Ta metoda wyrzuca wiadomość na konsole;
+                        </docdesc>
+                        
+                    </lflex>
+                </safezone>
+            </jumper>
+            <jumper id="ddocappend" class="">
+                <jumperbeen></jumperbeen>
+                <safezone>
+                    
+                    <lflex>
+                        <docinfo>Element: append() metoda</docinfo>
+                        <docdesc>
+                            Metoda dołącza węzeł obiektu docinnerhtmllub ciąg znaków po ostatnim dziecku elementu.
+                        </docdesc>
+                        
+                    </lflex>
+                </safezone>
+            </jumper>
+            <jumper id="ddocinnerhtml" class="">
+                <jumperbeen></jumperbeen>
+                <safezone>
+                    
+                    <lflex>
+                        <docinfo>Element: innerHTML właściwość</docinfo>
+                        <docdesc>
+                            pobiera lub ustawia zbór tagów html lub xml zawartych w elemencie.
+                        </docdesc>
+                        
+                    </lflex>
+                </safezone>
+            </jumper>
+            <script>
+                var ddoclist = [];
+                function bindDDoc(doc,hold=[],click=[]){
+                    ddoclist.push(doc);
+
+                    attachSwipeHandler(doc,()=>{
+                        rmTag(doc,"junfold")
+                        addTag(cur_doc,"hide")
+                    },true,70,2,true)
+
+                    hold.forEach(btn=>{
+                        attachHoldHandler(btn,()=>{
+                            rmTag(cur_doc,"hide")
+                            addTag(doc,"junfold")
+                        })
+                    })
+                    click.forEach(btn=>{
+                        btn.addEventListener("click",()=>{
+                            rmTag(cur_doc,"hide")
+                            addTag(doc,"junfold")
+                        })
+                    })
+                }
+                bindDDoc(ddoclog,[],[ddoclog_btn]);
+                bindDDoc(ddocappend,[],[ddocappend_btn]);
+                bindDDoc(ddocinnerhtml,[],[ddocinnerhtml_btn]);
+            </script>
+        </safezone>
+    </screen>
+    
+</body>
+
+</html>

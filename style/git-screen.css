@@ -1,0 +1,56 @@
+midgit{
+    display: flex;
+    justify-content: center;
+}
+
+.giticon{
+    padding: 1vh;
+    margin: 1vh;
+    border-radius: 2vh;
+    background-color: var(--text-blue);
+    aspect-ratio: 1;
+    width: 15vh;
+}
+.cbgit{
+    border:none;
+    background-color: white;
+    height: 3vh;
+}
+
+diffile{
+    display: flex;
+    flex-direction: column;
+
+    margin: 2vh;
+    background-color: black;
+    display: block;
+
+    
+}
+.diffel{
+    font-size: 3vh;
+}
+
+.cbox{
+    display: inline-block;
+    aspect-ratio: 1;
+    width: 2.5vh;
+    position: relative;
+    top: 0.5vh;
+    background-color: white;
+    margin-left: 1vh;
+}
+.ceck>.cbox{
+    background-color: var(--text-blue);
+}
+
+.giticon:hover{
+    background-color: var(--forground-blue-1-5);
+}
+
+it{
+    cursor: grab;
+
+    height: 5vh;
+    display: block;
+}

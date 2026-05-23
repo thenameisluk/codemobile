@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   width="800px"
+   height="800px"
+   viewBox="0 0 24 24"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="push-down-svgrepo-com.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.59625"
+     inkscape:cx="400"
+     inkscape:cy="400"
+     inkscape:window-width="1079"
+     inkscape:window-height="1014"
+     inkscape:window-x="26"
+     inkscape:window-y="23"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg1" />
+  <title
+     id="title1" />
+  <g
+     id="Complete"
+     style="stroke:#ffffff;stroke-opacity:1">
+    <g
+       id="F-Push"
+       style="stroke:#ffffff;stroke-opacity:1">
+      <g
+         id="Down"
+         style="stroke:#ffffff;stroke-opacity:1">
+        <g
+           id="g1"
+           style="stroke:#ffffff;stroke-opacity:1">
+          <polyline
+             data-name="Down"
+             fill="none"
+             id="Down-2"
+             points="5 6.1 12 13.1 19 6.1"
+             stroke="#000000"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             stroke-width="2"
+             style="stroke:#ffffff;stroke-opacity:1" />
+          <line
+             fill="none"
+             stroke="#000000"
+             stroke-linecap="round"
+             stroke-linejoin="round"
+             stroke-width="2"
+             x1="5"
+             x2="19"
+             y1="17.9"
+             y2="17.9"
+             id="line1"
+             style="stroke:#ffffff;stroke-opacity:1" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

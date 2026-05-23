@@ -1,0 +1,80 @@
+@font-face {
+  font-family: mainFont; /* set name */
+  src: url(../fonts/InterVariable.woff2); /* url of the font */
+}
+
+@font-face {
+  font-family: codeFont; /* set name */
+  src: url(../fonts/JetBrainsMono-Regular.woff2); /* url of the font */
+}
+
+:root{
+    --backgroud-0-5: #141414;
+    --backgroud-1: #1e1e1e;
+    --backgroud-1-5: #2f2f2f;
+    --backgroud-2: #515151;
+    --backgroud-2-5: #414141;
+    --backgroud-3: #626262;
+
+    --bg-code: #1e1e1e;
+
+    --forground-blue-2: #325FC7;
+    --forground-blue-1-5: #25499b;
+
+    --been: #757575;
+
+    --text-blue: #325FC7;
+    /* --text-blue: rgb(25, 75, 193); */
+    scrollbar-color: var(--backgroud-3) transparent !important;
+
+    --error: #db1a1aff;
+    --warning: #f57800ff;
+}
+
+.darken{
+    filter: brightness(0.4);
+}
+
+
+body{
+    user-select: none;
+
+    cursor: default;
+
+    font-family: mainFont;
+    color: white;
+    background-color: black;
+    margin:2vh;
+}
+darkner{
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+}
+
+screen{
+    overflow: hidden;
+
+    position: absolute;
+    top: 0;
+    left: 50%;
+    translate: -50%;
+
+    margin:auto;
+    background-color: var(--backgroud-1);
+    display:block;
+    aspect-ratio: 9/16;
+    height: 100vh;
+
+    border-radius: 4vh;
+}
+safezone{
+    margin-top: 0;
+    margin-bottom: 0;
+    display: block;
+    margin-left: 2vh;
+    margin-right: 2vh;
+    height: 100%;
+}
+
