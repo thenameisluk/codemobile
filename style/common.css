@@ -41,7 +41,7 @@ desc{
 }
 jumper{
     left: 0;
-    top: 100%;
+    top: 100vh;
 
     border-top-left-radius: 3vh;
     border-top-right-radius: 3vh;
@@ -56,7 +56,14 @@ jumper{
     position: absolute;
     display: block;
     background-color: var(--backgroud-1-5);
+
+    transform: none;
 }
+
+.junfold{
+    transform: translate(0,-100%);
+}
+
 
 popup{
     scale: 0;
@@ -71,9 +78,6 @@ popup{
     scale: 100%;
 }
 
-.junfold{
-    transform: translate(0,-100%);
-}
 
 jumperbeen{
     display: block;

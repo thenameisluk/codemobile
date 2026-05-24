@@ -63,7 +63,7 @@ screen{
 
     margin:auto;
     background-color: var(--backgroud-1);
-    display:block;
+    display:flexbox;
     aspect-ratio: 9/16;
     height: 100vh;
 

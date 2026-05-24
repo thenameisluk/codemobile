@@ -297,11 +297,32 @@
                     <lbitemnh>
                         Motyw
                         <themegrid>
-                            <img id="ta" class="theme" src="./asety/code/a.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(ta,"themeS");rmTag(code,["alt","blank","alt2"]);addTag(code,"blank")'>
-                            <img id="tb" class="theme themeS" src="./asety/code/b.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(tb,"themeS");rmTag(code,["alt","blank","alt2"])'>
-                            <img id="tc" class="theme" src="./asety/code/c.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(tc,"themeS");rmTag(code,["alt","blank","alt2"]);addTag(code,"alt")'>
-                            <img id="td" class="theme" src="./asety/code/d.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(td,"themeS");rmTag(code,["alt","blank","alt2"]);addTag(code,"alt2")'>
+                            <img id="ta" class="theme" src="./asety/code/a.svg" 
+                                onclick='rmTag([ta,tb,tc,td],"themeS");addTag(ta,"themeS");swapStyle(0)'>
+                            <img id="tb" class="theme themeS" src="./asety/code/b.svg" 
+                                onclick='rmTag([ta,tb,tc,td],"themeS");addTag(tb,"themeS");swapStyle(1)'>
+                            <img id="tc" class="theme" src="./asety/code/c.svg" 
+                                onclick='rmTag([ta,tb,tc,td],"themeS");addTag(tc,"themeS");swapStyle(2)'>
+                            <img id="td" class="theme" src="./asety/code/d.svg" 
+                                onclick='rmTag([ta,tb,tc,td],"themeS");addTag(td,"themeS");swapStyle(3)'>
                         </themegrid>
+                        <script>
+                            function swapStyle(s=0){
+                                let cstyles = [["blank","blanks"],null,["alt","alts"],["alt2","alt2s"]];
+
+                                cstyles.forEach((cs,i)=>{
+                                    if(cs==null)return;
+                                    if(i==s){
+                                        addTag(code,cs[0]);
+                                        addTag(code_screen,cs[1])
+                                    }else{
+                                        rmTag(code,cs[0]);
+                                        rmTag(code_screen,cs[1])
+                                    }
+                                       
+                                })
+                            }
+                        </script>
                     </lbitemnh>
                 </listbox>
                 <info>Konta</info>
@@ -397,11 +418,11 @@
                     <reg>main.js<img class="inlineicon" src="./asety/langs/javascript-svgrepo-com.svg"></reg>
                     <digbuble class="right grab" onclick='addTag(rslider,"sshow");rmTag(cur_code,"hide")'>
                         <warn>
-                            <img src="./asety/sym/warning-1-svgrepo-com.svg" class="inlineicon">
+                            <wbg><img src="./asety/sym/warning-1-svgrepo-com.svg" class="eicon"></wbg>
                             1
                         </warn>
                         <err>
-                            <img src="./asety/sym/error-warning-danger-problem-attention-svgrepo-com.svg" class="inlineicon">
+                            <ebg><img src="./asety/sym/error-warning-danger-problem-attention-svgrepo-com.svg" class="eicon"></ebg>
                             1
                         </err>
                     </digbuble>
@@ -439,7 +460,7 @@
             <rslider id="rslider" class="">
                 <safezone>
                 <errtag style="padding-top: 2vh;">
-                    <img class="erricon" src="./asety/sym/error-warning-danger-problem-attention-svgrepo-com.svg" style="float: left;" onclick="fromto(main_screen)">
+                    <ebg><img src="./asety/sym/warning-1-svgrepo-com.svg" class="eicon"></ebg>
                     <ce>Błędy</ce>
                 </errtag>
                     <listbox>
@@ -448,7 +469,7 @@
                         </lbitemnh>
                     </listbox>
                     <errtag>
-                        <img class="erricon" src="./asety/sym/warning-1-svgrepo-com.svg" style="float: left;" onclick="fromto(main_screen)">
+                        <wbg><img src="./asety/sym/warning-1-svgrepo-com.svg" class="eicon"></wbg>
                         <cw>Ostrzeżenia</cw>
                     </errtag>
                     <listbox>

@@ -32,6 +32,10 @@ ln{/*line number*/
 
 
 /* alt */
+.alts{
+    --error: #d55e00;
+    --warning: #e69f00;
+}
 .alt>fn{/*function*/
     color: #56b4e9;
 }
@@ -64,6 +68,10 @@ ln{/*line number*/
 }
 
 /* alt2 */
+.alt2s{
+    --error: #80DDE0;
+    --warning: #FFD04D;
+}
 .alt2>fn{/*function*/
     color: #56B4E9;
 }
@@ -95,6 +103,10 @@ ln{/*line number*/
     color: #AED8EF;
 }
 /* blank */
+.blanks{
+    --error: #ffffff;
+    --warning: #ffffff;
+}
 .blank>*{
     color: white;
 }
@@ -156,6 +168,42 @@ topisland{
     
     border-radius: 2vh;
 }
+wbg{
+    display: inline-block;
+    aspect-ratio: 1;
+    padding: 0;
+
+    width: 3vh;
+    position: relative;
+    top: 0.5vh;
+
+    background-color: var(--warning);
+}
+
+ebg{
+    display: inline-block;
+    aspect-ratio: 1;
+    padding: 0;
+
+    width: 3vh;
+    position: relative;
+    top: 0.5vh;
+
+    background-color: var(--error);
+}
+.eicon{
+    width: 110%;
+    height: 110%;
+    display: block;
+}
+
+wicon{
+    width: 110%;
+    height: 110%;
+    display: block;
+    background-color: transparent;
+    background-image:url("../asety/sym/warning-1-svgrepo-com.svg");
+}
 
 digbuble{
     font-size: 3vh;
@@ -163,9 +211,9 @@ digbuble{
     display: inline-block;
     background-color: var(--backgroud-1);
 }
-digbuble:hover{
+/* digbuble:hover{
     background-color: var(--backgroud-0-5);
-}
+} */
 
 
 
