@@ -27,8 +27,8 @@
     /* --text-blue: rgb(25, 75, 193); */
     scrollbar-color: var(--backgroud-3) transparent !important;
 
-    --error: #db1a1aff;
-    --warning: #f57800ff;
+    --error: #ed9292;
+    --warning: #eca25c;
 }
 
 .darken{

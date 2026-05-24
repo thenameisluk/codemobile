@@ -43,11 +43,7 @@
                 e.classList.remove(tag);
             }))
         }
-        function fromto(a,b){
-            console.log("from "+a+" to "+b)
-            addTag(a,"hide")
-            rmTag(b,"hide")
-        }
+        
         function tglTag(a,tag){
             if(tag instanceof Array){
                 tag.forEach(t=>tglTag(a,t));
@@ -57,6 +53,14 @@
                 e.classList.toggle(tag);
             }))
             console.log("toggle")
+        }
+
+        function hasTag(a,tag){
+            return a.classList.contains(tag);
+        }
+
+        function swapImg(el,src=""){
+            el.src = src;
         }
 
 
@@ -172,7 +176,7 @@
                 // console.log(lastP)
             })
         </script>
-        <safezone id="main_screen" class="">
+        <safezone id="main_screen" class="hide">
             <main>
                 <maintitle>
                     Witaj w CodeMobile
@@ -187,7 +191,7 @@
                     <midcenter>
                         <popup id="importp" onmouseleave='rmTag(importp,"spopup")' style="transform: translate(-5vh,10vh);">
                             <listbox>
-                                <lbitem onclick='fromto(main_screen,code_screen)'>
+                                <lbitem onclick='fromto(code_screen)'>
                                     lokanych plików
                                 </lbitem>
                                 <lbseparator></lbseparator>
@@ -201,8 +205,8 @@
                     </midcenter>
                 </twoflex>
                 <info>Otwórz ostatni</info>
-                <img class="settings" src="./asety/settings-svgrepo-com.svg" onclick='fromto(main_screen,settings_screen)'>
-                <listbox onclick='fromto(main_screen,code_screen)'>
+                <img class="settings" src="./asety/settings-svgrepo-com.svg" onclick='fromto(settings_screen)'>
+                <listbox onclick='fromto(code_screen)'>
                     <lbitem>
                         moja strona za 1m
                     </lbitem>
@@ -227,7 +231,7 @@
                     <lflex>
                         <info>Nazwa projektu</info>
                         <input class="textinput" type="text" id="nprj">
-                        <confbutton onclick='validateText(nprj,()=>{fromto(main_screen,code_screen)})'>Utwórz</confbutton>
+                        <confbutton onclick='validateText(nprj,()=>{fromto(code_screen)})'>Utwórz</confbutton>
                     </lflex>
                 </safezone>
             </jumper>
@@ -243,7 +247,7 @@
                             <option value="none">Brak</option>
                             <option value="github"><img class="inlineicon" src="./asety/github-svgrepo-com.svg">Nazwa użytkownika</option>
                         </select>
-                        <confbutton onclick='validateText(addr,()=>{fromto(main_screen,code_screen)})'>Importuj</confbutton>
+                        <confbutton onclick='validateText(addr,()=>{fromto(code_screen)})'>Importuj</confbutton>
                     </lflex>
                 </safezone>
             </jumper>
@@ -280,7 +284,7 @@
         <safezone id="settings_screen" class="hide">
             <main>
                 <topbar>
-                    <img class="backicon" src="./asety/chevron-back-svgrepo-com.svg" onclick='fromto(settings_screen,main_screen)'>
+                    <img class="backicon" src="./asety/chevron-back-svgrepo-com.svg" onclick='fromto(main_screen)'>
                     Ustawienia
                 </topbar>
                 <scroller>
@@ -326,10 +330,32 @@
                     </lbitem>
                 </listbox>
                 <info>Dostępność</info>
-                <listbox>
-                    <lbitem onclick='tglTag(jbt,"chked")'>
+                <listbox style="margin-bottom: 2vh;">
+                    <lbitem onclick='tglTag(jbt,"chked");if(hasTag(jbt,"chked"))rmTag(coc,"hide");else addTag(coc,"hide");recalcHand()'>
                         Tryb jednorękiego bandyty<toggle id="jbt" class="right"><tgdot></tgdot></toggle>
                     </lbitem>
+                    <coc id="coc" class="hide">
+                        <lbseparator></lbseparator>
+                        <lbitemnh>
+                            Ręka<tustate class="right"><tufield class="ck" id="rl" onclick='addTag(rl,"ck");rmTag(rp,"ck");recalcHand()'>Lewa</tufield><tufield id="rp" onclick='addTag(rp,"ck");rmTag(rl,"ck");recalcHand()'>Prawa</tufield></tustate>
+                        </lbitemnh>
+                    </coc>
+                    <script>
+                        function recalcHand(){
+                            if(!hasTag(jbt,"chked")){
+                                swapImg(kb,"./asety/keyboard.jpg")
+                                console.log("kb: reg")
+                            }else{
+                                if(hasTag(rl,"ck")){
+                                    console.log("kb: l")
+                                    swapImg(kb,"./asety/keyboardL.jpg")
+                                }else{
+                                    console.log("kb: p")
+                                    swapImg(kb,"./asety/keyboardP.jpg")
+                                }
+                            }
+                        }
+                    </script>
                 </listbox>
                 </scroller>
                 
@@ -363,7 +389,7 @@
 <ln>17</ln>       <vr>iteml</vr>.<doc id="docinnerhtml_txt2">innerHTML</doc> = <st>"brak zleceń"</st>
 <ln>18</ln>  <op>}</op></code>
 <complete><coption id="doclog_btn">log</coption><coption id="docappend_btn">append</coption><coption id="docinnerhtml_btn">innerHTML</coption></complete>
-<img class="kb" src="./asety/keyboard.jpg">
+<img class="kb" id="kb" src="./asety/keyboard.jpg">
             </codecontainer >
             <ico>
                 <topisland>
@@ -390,7 +416,7 @@
             <lslider id="lslider" class="" >
                 <safezone>
                     <sfilar>
-                        <img class="backicon" src="./asety/chevron-back-svgrepo-com.svg" style="float: left;" onclick="fromto(code_screen,main_screen)">
+                        <img class="backicon" src="./asety/chevron-back-svgrepo-com.svg" style="float: left;" onclick="fromto(main_screen)">
                         Nazwa
                     </sfilar>
                     <file>
@@ -404,16 +430,16 @@
                     </file>
                     
                     <bottomb>
-                        <img src="./asety/tab/git-svgrepo-com.svg" class="tabicon" onclick='fromto(code_screen,git_screen)'>
-                        <img src="./asety/tab/play-svgrepo-com.svg" class="tabicon" onclick='fromto(code_screen,preview_screen)'>
-                        <img src="./asety/tab/docs-svgrepo-com.svg" class="tabicon" onclick='fromto(code_screen,doc_screen)'>
+                        <img src="./asety/tab/git-svgrepo-com.svg" class="tabicon" onclick='fromto(git_screen)'>
+                        <img src="./asety/tab/play-svgrepo-com.svg" class="tabicon" onclick='fromto(preview_screen)'>
+                        <img src="./asety/tab/docs-svgrepo-com.svg" class="tabicon" onclick='fromto(doc_screen)'>
                     </bottomb>
                 </safezone>
             </lslider>
             <rslider id="rslider" class="">
                 <safezone>
                 <errtag style="padding-top: 2vh;">
-                    <img class="erricon" src="./asety/sym/error-warning-danger-problem-attention-svgrepo-com.svg" style="float: left;" onclick="fromto(code_screen,main_screen)">
+                    <img class="erricon" src="./asety/sym/error-warning-danger-problem-attention-svgrepo-com.svg" style="float: left;" onclick="fromto(main_screen)">
                     <ce>Błędy</ce>
                 </errtag>
                     <listbox>
@@ -422,7 +448,7 @@
                         </lbitemnh>
                     </listbox>
                     <errtag>
-                        <img class="erricon" src="./asety/sym/warning-1-svgrepo-com.svg" style="float: left;" onclick="fromto(code_screen,main_screen)">
+                        <img class="erricon" src="./asety/sym/warning-1-svgrepo-com.svg" style="float: left;" onclick="fromto(main_screen)">
                         <cw>Ostrzeżenia</cw>
                     </errtag>
                     <listbox>
@@ -559,7 +585,7 @@
         <full id="preview_screen" class="hide">
             <iframe src="https://thenameisluk.github.io/codePlayer/"></iframe>
             <bottombar>
-                    <img class="backicon" src="./asety/chevron-back-svgrepo-com.svg" onclick='fromto(preview_screen,code_screen)'>
+                    <img class="backicon" src="./asety/chevron-back-svgrepo-com.svg" onclick='fromto(code_screen)'>
                     <input class="textinput" type="text" value="172.0.0.1" disabled>
             </bottombar>
         </full>
@@ -567,7 +593,7 @@
         <safezone id="git_screen" class="hide">
             <main>
                 <topbar>
-                    <img class="backicon" src="./asety/chevron-back-svgrepo-com.svg" onclick='fromto(git_screen,code_screen)'>
+                    <img class="backicon" src="./asety/chevron-back-svgrepo-com.svg" onclick='fromto(code_screen)'>
                     Git
                 </topbar>
                 <midgit>
@@ -602,7 +628,7 @@
         <safezone id="doc_screen" class="hide">
             <main>
                 <topbar>
-                    <img class="backicon" src="./asety/chevron-back-svgrepo-com.svg" onclick='fromto(doc_screen,code_screen)'>
+                    <img class="backicon" src="./asety/chevron-back-svgrepo-com.svg" onclick='fromto(code_screen)'>
                     Pomoc
                 </topbar>
                 <info>Element</info>
@@ -692,6 +718,32 @@
                 bindDDoc(ddoclog,[],[ddoclog_btn]);
                 bindDDoc(ddocappend,[],[ddocappend_btn]);
                 bindDDoc(ddocinnerhtml,[],[ddocinnerhtml_btn]);
+
+
+                let screens = [main_screen,settings_screen,code_screen,git_screen,preview_screen,doc_screen];
+                function fromto(b,back=false){
+                    console.log("going to "+b.id)
+                    addTag(screens,"hide")
+                    rmTag(b,"hide")
+                    
+                    if(!back)
+                        history.pushState(b.id,null,"#"+b.id)
+                }
+
+                window.addEventListener("popstate", (e) => {
+                    console.log(e)
+                    if(e.state){
+                        fromto(document.getElementById(e.state),true)
+                    }else fromto(main_screen,true)
+                });
+                
+                let prev = document.getElementById(location.hash.slice(1))
+
+                if(prev)
+                {
+                    fromto(prev)
+                }else rmTag(main_screen,"hide")
+                
             </script>
         </safezone>
     </screen>

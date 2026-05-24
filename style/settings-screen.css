@@ -28,7 +28,7 @@ toggle{
     display: inline-block;
     height: 3vh;
     width: 6vh;
-    background-color: red;
+    background-color: rgb(250, 48, 48);
 
     border-radius: 2vh;
 
@@ -47,8 +47,31 @@ tgdot{
     transition-duration: 300ms;
 }
 .chked{
-    background-color: green;
+    background-color: rgb(24, 255, 24);
 }
 .chked>tgdot{
     margin-left: 3vh;
+}
+
+
+tustate{
+    display: block;
+    position: relative;
+    top: -0.5vh;
+    background-color: var(--backgroud-1);
+    padding: 0.5vh;
+    border-radius: 0.5vh;
+}
+tustate:hover{
+    background-color: var(--backgroud-0-5);
+}
+tufield{
+    cursor: grab;
+    margin: 0.5vh;
+    padding: 0.3vh;
+
+    border-radius: 0.5vh;
+}
+.ck{
+    background-color: var(--backgroud-2);
 }

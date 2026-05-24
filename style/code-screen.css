@@ -103,11 +103,11 @@ ln{/*line number*/
 
 warn{
     padding: 1vh;
-    color: #f57800ff;
+    color: var(--warning);
 }
 err{
     padding: 1vh;
-    color: #db1a1aff;
+    color: var(--error);
 }
 
 ce{
@@ -161,10 +161,10 @@ digbuble{
     font-size: 3vh;
     border-radius: 1vh;
     display: inline-block;
-    background-color: var(--backgroud-3);
+    background-color: var(--backgroud-1);
 }
 digbuble:hover{
-    background-color: var(--backgroud-2-5);
+    background-color: var(--backgroud-0-5);
 }
 
 
