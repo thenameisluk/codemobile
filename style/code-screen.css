@@ -65,34 +65,34 @@ ln{/*line number*/
 
 /* alt2 */
 .alt2>fn{/*function*/
-    color: #56b4e9;
+    color: #56B4E9;
 }
 .alt2>op{
     color: #cccccc;
 }
 .alt2>kw{/*keyword*/
-    color: #e69f00;
+    color: #E69F00;
 }
 .alt2>vr{/*variable*/
-    color: #56b4e9;
+    color: #80DDE0;
 }
 .alt2>cs{/*class*/
-    color: #009e73;
+    color: #00C792;
 }
 .alt2>tp{/*type*/
-    color: #e69f00;
+    color: #B8A2EC;
 }
 .alt2>st{/*string*/
-    color: #f0e442;
+    color: #F0E442;
 }
 .alt2>ct{/*const*/
-    color: #f0e442;
+    color: #D897BB;
 }
 .alt2>nm{/*number*/
-    color: #cc79a7;
+    color: #F4935A;
 }
 .alt2>ln{/*line number*/
-    color: #2383af;
+    color: #AED8EF;
 }
 /* blank */
 .blank>*{
