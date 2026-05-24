@@ -142,7 +142,7 @@ confbutton{
     padding: 1vh;
 
     background-color: var(--forground-blue-2);
-    color: black;
+    color: #000;
     border: none;
 
     cursor: grab;
