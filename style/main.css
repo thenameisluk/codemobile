@@ -18,12 +18,12 @@
 
     --bg-code: #1e1e1e;
 
-    --forground-blue-2: #325FC7;
-    --forground-blue-1-5: #25499b;
+    --forground-blue-2: #83a8ff;
+    --forground-blue-1-5: #325FC7;
 
     --been: #757575;
 
-    --text-blue: #325FC7;
+    --text-blue: #83a8ff;
     /* --text-blue: rgb(25, 75, 193); */
     scrollbar-color: var(--backgroud-3) transparent !important;
 
