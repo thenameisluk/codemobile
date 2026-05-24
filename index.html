@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="./style/preview-screen.css">
     <link rel="stylesheet" href="./style/git-screen.css">
     <link rel="stylesheet" href="./style/priority.css">
+    <link rel="icon" type="image/svg" href="./favicon.svg">
     <script>
         if(!navigator.userAgent.toLowerCase().includes("firefox"))
             alert("!!!UWAGA!!!\nPoprawne działania gwarantowane wyłącznie w przeglądarce Firefox!!!\nUrządzenie Mobile oraz google chrome nie wspierane!!!");
@@ -25,11 +26,19 @@
                 fn(document.getElementById(a))
         }
         function addTag(a,tag){
+            if(tag instanceof Array){
+                tag.forEach(t=>addTag(a,t));
+                return;
+            }
             getE(a,(e=>{
                 e.classList.add(tag);
             }))
         }
         function rmTag(a,tag){
+            if(tag instanceof Array){
+                tag.forEach(t=>rmTag(a,t));
+                return;
+            }
             getE(a,(e=>{
                 e.classList.remove(tag);
             }))
@@ -40,6 +49,10 @@
             rmTag(b,"hide")
         }
         function tglTag(a,tag){
+            if(tag instanceof Array){
+                tag.forEach(t=>tglTag(a,t));
+                return;
+            }
             getE(a,(e=>{
                 e.classList.toggle(tag);
             }))
@@ -280,10 +293,10 @@
                     <lbitemnh>
                         Motyw
                         <themegrid>
-                            <img id="ta" class="theme themeS" src="./asety/code/a.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(ta,"themeS")'>
-                            <img id="tb" class="theme" src="./asety/code/b.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(tb,"themeS")'>
-                            <img id="tc" class="theme" src="./asety/code/c.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(tc,"themeS")'>
-                            <img id="td" class="theme" src="./asety/code/d.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(td,"themeS")'>
+                            <img id="ta" class="theme" src="./asety/code/a.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(ta,"themeS");rmTag(code,["alt","blank","alt2"]);addTag(code,"blank")'>
+                            <img id="tb" class="theme themeS" src="./asety/code/b.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(tb,"themeS");rmTag(code,["alt","blank","alt2"])'>
+                            <img id="tc" class="theme" src="./asety/code/c.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(tc,"themeS");rmTag(code,["alt","blank","alt2"]);addTag(code,"alt")'>
+                            <img id="td" class="theme" src="./asety/code/d.svg" onclick='rmTag([ta,tb,tc,td],"themeS");addTag(td,"themeS");rmTag(code,["alt","blank","alt2"]);addTag(code,"alt2")'>
                         </themegrid>
                     </lbitemnh>
                 </listbox>
@@ -328,7 +341,7 @@
             
             
             <codecontainer>
-                <code id="code">
+                <code id="code" class="">
                     
 
 <ln> 1</ln> <tp>function</tp> <fn>reload</fn><op>(){</op>
@@ -354,7 +367,7 @@
             </codecontainer >
             <ico>
                 <topisland>
-                    <img class="inlineicon grab" src="./asety/menu-svgrepo-com.svg" onclick='addTag(lslider,"sshow");rmTag(cur_code,"hide")'>
+                    <!-- <img class="inlineicon grab" src="./asety/menu-svgrepo-com.svg" onclick='addTag(lslider,"sshow");rmTag(cur_code,"hide")'> -->
                     <reg>main.js<img class="inlineicon" src="./asety/langs/javascript-svgrepo-com.svg"></reg>
                     <digbuble class="right grab" onclick='addTag(rslider,"sshow");rmTag(cur_code,"hide")'>
                         <warn>
@@ -399,7 +412,7 @@
             </lslider>
             <rslider id="rslider" class="">
                 <safezone>
-                <errtag>
+                <errtag style="padding-top: 2vh;">
                     <img class="erricon" src="./asety/sym/error-warning-danger-problem-attention-svgrepo-com.svg" style="float: left;" onclick="fromto(code_screen,main_screen)">
                     <ce>Błędy</ce>
                 </errtag>

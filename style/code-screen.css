@@ -1,3 +1,4 @@
+/* default */
 fn{/*function*/
     color: #d8dd73;
 }
@@ -29,6 +30,85 @@ ln{/*line number*/
     color: #2383af;
 }
 
+
+/* alt */
+.alt>fn{/*function*/
+    color: #56b4e9;
+}
+.alt>op{
+    color: #cccccc;
+}
+.alt>kw{/*keyword*/
+    color: #e69f00;
+}
+.alt>vr{/*variable*/
+    color: #56b4e9;
+}
+.alt>cs{/*class*/
+    color: #009e73;
+}
+.alt>tp{/*type*/
+    color: #e69f00;
+}
+.alt>st{/*string*/
+    color: #f0e442;
+}
+.alt>ct{/*const*/
+    color: #f0e442;
+}
+.alt>nm{/*number*/
+    color: #cc79a7;
+}
+.alt>ln{/*line number*/
+    color: #2383af;
+}
+
+/* alt2 */
+.alt2>fn{/*function*/
+    color: #56b4e9;
+}
+.alt2>op{
+    color: #cccccc;
+}
+.alt2>kw{/*keyword*/
+    color: #e69f00;
+}
+.alt2>vr{/*variable*/
+    color: #56b4e9;
+}
+.alt2>cs{/*class*/
+    color: #009e73;
+}
+.alt2>tp{/*type*/
+    color: #e69f00;
+}
+.alt2>st{/*string*/
+    color: #f0e442;
+}
+.alt2>ct{/*const*/
+    color: #f0e442;
+}
+.alt2>nm{/*number*/
+    color: #cc79a7;
+}
+.alt2>ln{/*line number*/
+    color: #2383af;
+}
+/* blank */
+.blank>*{
+    color: white;
+}
+
+
+
+warn{
+    padding: 1vh;
+    color: #f57800ff;
+}
+err{
+    padding: 1vh;
+    color: #db1a1aff;
+}
 
 ce{
     text-decoration: underline wavy var(--error);
@@ -87,14 +167,7 @@ digbuble:hover{
     background-color: var(--backgroud-2-5);
 }
 
-warn{
-    padding: 1vh;
-    color: #f57800ff;
-}
-err{
-    padding: 1vh;
-    color: #db1a1aff;
-}
+
 
 
 .cc{
