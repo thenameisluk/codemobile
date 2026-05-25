@@ -176,7 +176,7 @@
                 // console.log(lastP)
             })
         </script>
-        <safezone id="main_screen" class="hide">
+      <safezone id="main_screen" class="hide">
             <main>
                 <maintitle>
                     Witaj w CodeMobile
@@ -223,9 +223,7 @@
             <curtain id="cur_main" class="hide" onmousedown='addTag(this,"hide");rmTag(mainlist,"junfold");lock=true'>
 
             </curtain>
-            
-            
-            <jumper id="newproj">
+             <jumper id="newproj">
                 <jumperbeen></jumperbeen>
                 <safezone>
                     <lflex>
@@ -251,7 +249,14 @@
                     </lflex>
                 </safezone>
             </jumper>
-            <script>
+            
+            
+           
+      </safezone>
+     
+
+
+       <script>
                 var mainlist = [];
 
                 function bindMain(doc,hold=[],click=[]){
@@ -279,7 +284,6 @@
                 bindMain(gitimp,[],[git_btn])
 
             </script>
-        </safezone>
         <!-- ustawienia -->
         <safezone id="settings_screen" class="hide">
             <main>
@@ -744,11 +748,16 @@
                 let screens = [main_screen,settings_screen,code_screen,git_screen,preview_screen,doc_screen];
                 function fromto(b,back=false){
                     console.log("going to "+b.id)
-                    addTag(screens,"hide")
+                    screens.forEach(s=>{if(s.id!=b.id)addTag(s,"hide")})
+                    
                     rmTag(b,"hide")
                     
-                    if(!back)
-                        history.pushState(b.id,null,"#"+b.id)
+                    if(!back){
+                        if(b.id!="main_screen")
+                            history.pushState(b.id,null,"#"+b.id)
+                        else history.pushState(b.id,null,"#")
+                    }
+                        
                 }
 
                 window.addEventListener("popstate", (e) => {
@@ -762,8 +771,9 @@
 
                 if(prev)
                 {
-                    fromto(prev)
-                }else rmTag(main_screen,"hide")
+                    fromto(prev,true)
+                }
+                else fromto(main_screen,true)
                 
             </script>
         </safezone>

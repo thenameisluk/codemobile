@@ -41,7 +41,7 @@ desc{
 }
 jumper{
     left: 0;
-    top: 100vh;
+    bottom: 0;
 
     border-top-left-radius: 3vh;
     border-top-right-radius: 3vh;
@@ -57,11 +57,11 @@ jumper{
     display: block;
     background-color: var(--backgroud-1-5);
 
-    transform: none;
+    transform: translate(0,100%);
 }
 
 .junfold{
-    transform: translate(0,-100%);
+    transform: none;
 }
 
 
