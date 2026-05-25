@@ -46,7 +46,7 @@ diffile{
 }
 
 .giticon:hover{
-    background-color: var(--forground-blue-1-5);
+    background-color: var(--forground-blue-1);
 }
 
 it{
