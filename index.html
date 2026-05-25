@@ -128,9 +128,13 @@
     function validateText(/**@type {Element}**/inp,fn=()=>{}){
         /**@type {string}**/
         let txt = inp.value
+
+
         
         if(txt==""){
             addTag(inp,"inp_wrong");
+            addTag(app_screen,"shake")
+            setTimeout(()=>{rmTag(app_screen,"shake")},400)
         }else{
             rmTag(inp,"inp_wrong");
             fn();
@@ -631,7 +635,7 @@
                         Ściągnij
                     </midcenter>
                 </midgit>
-                <input class="textinput" type="text" value="nazwa">
+                <input id="commit_name" class="textinput" type="text" value="nazwa">
                 <diffile>
                     <it onclick='tglTag(this,"ceck")'>
                         <img class="cbox" src="./asety/check-svgrepo-com.svg">
@@ -647,7 +651,7 @@
                     </it>
                 </diffile>
                 
-                <confbutton onclick='document.querySelectorAll(".ceck").forEach((el)=>{el.remove()})'>commit</confbutton>
+                <confbutton onclick='validateText(commit_name,()=>{document.querySelectorAll(".ceck").forEach((el)=>{el.remove()})})'>commit</confbutton>
             </main>
         </safezone>
         <safezone id="doc_screen" class="hide">

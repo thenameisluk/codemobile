@@ -35,7 +35,10 @@
 .darken{
     filter: brightness(0.4);
 }
-
+@keyframes shakeAnimation {
+  from {transform: translate(-1vh,0);}
+  to {  transform: translate(1vh,0);}
+}
 
 body{
     user-select: none;
@@ -52,6 +55,12 @@ darkner{
     height: 100%;
     display: block;
     position: absolute;
+}
+
+.shake{
+  animation-name: shakeAnimation;
+  animation-duration: 100ms;
+  animation-iteration-count: infinite;
 }
 
 screen{
