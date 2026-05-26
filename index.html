@@ -14,8 +14,11 @@
     <link rel="stylesheet" href="./style/priority.css">
     <link rel="icon" type="image/svg" href="./favicon.svg">
     <script>
-        if(!navigator.userAgent.toLowerCase().includes("firefox"))
-            alert("!!!UWAGA!!!\nPoprawne działania gwarantowane wyłącznie w przeglądarce Firefox!!!\nUrządzenie Mobile oraz google chrome nie wspierane!!!");
+      let agnt = navigator.userAgent.toLowerCase();
+      if(!agnt.includes("firefox")){
+	  // alert("!!!UWAGA!!!\nPoprawne działania gwarantowane wyłącznie w przeglądarce Firefox (powinno działeć w Google Chrome jednak zmiany nie są testowane)!!!\nUrządzenie Mobile nie wspierane!!!");
+      }
+            
         
         function getE(a,fn){
             if(a instanceof Array)

@@ -8,6 +8,10 @@
   src: url(../fonts/JetBrainsMono-Regular.woff2); /* url of the font */
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
 :root{
     --backgroud-0-5: #141414;
     --backgroud-1: #1e1e1e;
@@ -26,7 +30,7 @@
 
     --text-blue: #4b81ff;
     /* --text-blue: rgb(25, 75, 193); */
-    scrollbar-color: var(--backgroud-3) transparent !important;
+    /* scrollbar-color: var(--backgroud-3) transparent !important; */
 
     --error: #ed9292;
     --warning: #eca25c;
