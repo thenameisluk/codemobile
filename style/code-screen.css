@@ -170,6 +170,7 @@ topisland{
 }
 wbg{
     display: inline-block;
+    
     aspect-ratio: 1;
     padding: 0;
 
@@ -178,10 +179,15 @@ wbg{
     top: 0.5vh;
 
     background-color: var(--warning);
+    background-size: cover;
+
+    mask-image: url("../asety/sym/warning-1-svgrepo-com.svg");
+    mask-size: cover;
 }
 
 ebg{
     display: inline-block;
+    
     aspect-ratio: 1;
     padding: 0;
 
@@ -190,8 +196,16 @@ ebg{
     top: 0.5vh;
 
     background-color: var(--error);
+    background-size: cover;
+
+    
+    mask-image: url("../asety/sym/error-warning-danger-problem-attention-svgrepo-com.svg");
+    mask-size: cover;
 }
 .eicon{
+    object-fit: cover ;
+    
+    position: relative;
     width: 110%;
     height: 110%;
     display: block;
