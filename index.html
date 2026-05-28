@@ -534,8 +534,8 @@
                 <safezone>
                     <lflex>
                         <info>Nowy plik</info>
-                        <input class="textinput" type="text">
-                        <confbutton onclick='rmTag(newfile,"junfold");addTag(cur_code,"hide")'>Dodaj</confbutton>
+                        <input id="npk" class="textinput" type="text">
+                        <confbutton onclick='validateText(npk,()=>{rmTag(newfile,"junfold");addTag(cur_code,"hide")})'>Dodaj</confbutton>
                     </lflex>
                 </safezone>
             </jumper>
@@ -544,8 +544,8 @@
                 <safezone>
                     <lflex>
                         <info>Nowyfolder</info>
-                        <input class="textinput" type="text">
-                        <confbutton onclick='rmTag(newdir,"junfold");addTag(cur_code,"hide")'>Dodaj</confbutton>
+                        <input id="nfd" class="textinput" type="text">
+                        <confbutton onclick='validateText(nfd,()=>{rmTag(newdir,"junfold");addTag(cur_code,"hide")})'>Dodaj</confbutton>
                     </lflex>
                 </safezone>
             </jumper>
